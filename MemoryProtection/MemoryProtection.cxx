@@ -269,7 +269,7 @@ namespace MemoryProtection
 	class CMemoryProtector : public SBlockDescriptorArray
 	{
 	public:
-		CMemoryProtector() : m_ForceReclaim(false), m_StackHighAddress(0), m_StackLowAddress(0)
+		CMemoryProtector() : m_ForceReclaim(false), m_StackHighAddress(0), m_StackFrame(0)
 		{
 		}
 
@@ -369,9 +369,9 @@ namespace MemoryProtection
 
 				if (MemoryProtector)
 				{
-					if (MemoryProtector->m_StackLowAddress <= (ULONG_PTR)&Flag)
+					if (MemoryProtector->m_StackFrame <= (ULONG_PTR)&Flag)
 					{
-						MemoryProtector->m_StackLowAddress = (ULONG_PTR)&Flag;
+						MemoryProtector->m_StackFrame = (ULONG_PTR)&Flag;
 
 						MemoryProtector->ReclaimMemoryWithoutProtection();
 					}
@@ -468,7 +468,7 @@ namespace MemoryProtection
 		static DWORD tlsSlotForInstance;
 		bool m_ForceReclaim;
 		ULONG_PTR m_StackHighAddress;
-		ULONG_PTR m_StackLowAddress;
+		ULONG_PTR m_StackFrame;
 	};
 
 	DWORD CMemoryProtector::tlsSlotForInstance = TLS_OUT_OF_INDEXES;
