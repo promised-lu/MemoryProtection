@@ -186,7 +186,7 @@ namespace MemoryProtection
 				if (!BlockDescriptor->IsBlockUsingIsoHeap())
 					hHeap = g_hProcessHeap;
 
-				HeapFree(hHeap, 0, (LPVOID)BlockDescriptor->BaseAddress());
+				::HeapFree(hHeap, 0, (LPVOID)BlockDescriptor->BaseAddress());
 			}
 
 			m_Size = 0;
@@ -352,7 +352,7 @@ namespace MemoryProtection
 						hHeap = g_hProcessHeap;
 					}
 
-					HeapFree(hHeap, 0, (LPVOID)BlockDescriptor->BaseAddress());
+					::HeapFree(hHeap, 0, (LPVOID)BlockDescriptor->BaseAddress());
 
 					RemoveBlockDescriptorAt(i--);
 				}
@@ -449,7 +449,7 @@ namespace MemoryProtection
 				}
 				else
 				{
-					HeapFree(hHeap, dwFlags, lpMem);
+					::HeapFree(hHeap, dwFlags, lpMem);
 				}
 			}
 		}
